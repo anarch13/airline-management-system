@@ -1,3 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+.login-register-container {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url('../Assets/background.jpeg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Reset only inside the component */
+.login-register-container * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .wrapper {
     position: relative;
     width: 420px;  

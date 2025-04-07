@@ -49,6 +49,7 @@ const LoginRegister = () => {
     };
 
     return (
+        <div className="login-register-container">
         <div className={`wrapper ${action}`}>
             <div className="form-box login">
                 <form onSubmit={handleLogin}>
@@ -131,6 +132,7 @@ const LoginRegister = () => {
             </div>
 
             {message && <p className="message">{message}</p>}
+        </div>
         </div>
     );
 };

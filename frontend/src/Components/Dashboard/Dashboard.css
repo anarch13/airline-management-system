@@ -1,0 +1,52 @@
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+.user-profile {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: #1976d2;
+    color: white;
+}
+
+.avatar {
+    width: 56px;
+    height: 56px;
+    background-color: white;
+    color: #1976d2;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 24px;
+    width: calc(100% - 240px);
+    margin-left: 240px;
+}
+
+.content-section {
+    padding: 24px;
+    max-width: 960px;
+    margin: auto;
+}
+
+.profile-details.MuiGrid-container,
+.search-form .MuiGrid-container {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+}
+
+@media (max-width: 768px) {
+    .profile-details.MuiGrid-container,
+    .search-form .MuiGrid-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+.search-form {
+    margin-top: 16px;
+}
