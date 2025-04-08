@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom'; // ⬅️ Import this
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import './LoginRegister.css';
 
 const LoginRegister = () => {
+    const navigate = useNavigate();
     const [action, setAction] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showRegisterPassword, setShowRegisterPassword] = useState(false);
@@ -43,10 +45,18 @@ const LoginRegister = () => {
                 password: loginPassword
             })
         });
-
+    
         const data = await res.json();
         setMessage(data.message);
-    };
+    
+        if (res.ok) {
+            // ✅ Save user info to localStorage
+            localStorage.setItem('user', JSON.stringify(data.user));
+    
+            // Redirect to Dashboard
+            navigate('/dashboard');
+        }
+    };    
 
     return (
         <div className="login-register-container">

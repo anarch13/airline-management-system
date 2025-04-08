@@ -54,7 +54,14 @@ app.post('/login', async (req, res) => {
       return res.status(401).json({ message: 'Incorrect password' });
     }
 
-    res.json({ message: 'Login successful' });
+    res.json({
+      message: 'Login successful',
+      user: {
+        username: user.username,
+        email: user.email,
+      },
+    });
+
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }

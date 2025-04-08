@@ -1,4 +1,3 @@
-// Dashboard.jsx
 import React, { useState } from 'react';
 import {
     Box,
@@ -47,6 +46,9 @@ const Dashboard = () => {
         class: 'economy',
     });
 
+    // ✅ Get user from localStorage
+    const user = JSON.parse(localStorage.getItem('user'));
+
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -67,11 +69,13 @@ const Dashboard = () => {
     const drawer = (
         <div>
             <Box className="user-profile">
-                <Avatar className="avatar">JD</Avatar>
+                <Avatar className="avatar">
+                    {user?.username?.[0]?.toUpperCase() || 'U'}
+                </Avatar>
                 <Box>
-                    <Typography variant="h6">John Doe</Typography>
+                    <Typography variant="h6">{user?.username || 'User'}</Typography>
                     <Typography variant="body2" color="text.secondary">
-                        john.doe@example.com
+                        {user?.email || 'user@example.com'}
                     </Typography>
                 </Box>
             </Box>
@@ -123,13 +127,10 @@ const Dashboard = () => {
                         <Typography variant="h5">Profile Information</Typography>
                         <Grid container className="profile-details">
                             <Grid item>
-                                <Typography><strong>Username:</strong> John Doe</Typography>
+                                <Typography><strong>Username:</strong> {user?.username}</Typography>
                             </Grid>
                             <Grid item>
-                                <Typography><strong>Email:</strong> john.doe@example.com</Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography><strong>Member Since:</strong> January 2024</Typography>
+                                <Typography><strong>Email:</strong> {user?.email}</Typography>
                             </Grid>
                         </Grid>
                     </Paper>
@@ -138,20 +139,20 @@ const Dashboard = () => {
                     <Paper className="content-section">
                         <Typography variant="h5">Search Flights</Typography>
                         <Box component="form" onSubmit={handleSearchSubmit} className="search-form">
-                            <Grid container>
-                                <Grid item>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} sm={6}>
                                     <TextField label="From" name="fromCity" value={searchForm.fromCity} onChange={handleSearchChange} fullWidth />
                                 </Grid>
-                                <Grid item>
+                                <Grid item xs={12} sm={6}>
                                     <TextField label="To" name="toCity" value={searchForm.toCity} onChange={handleSearchChange} fullWidth />
                                 </Grid>
-                                <Grid item>
+                                <Grid item xs={12} sm={6}>
                                     <TextField label="Departure Date" name="departureDate" type="date" value={searchForm.departureDate} onChange={handleSearchChange} fullWidth InputLabelProps={{ shrink: true }} />
                                 </Grid>
-                                <Grid item>
+                                <Grid item xs={12} sm={6}>
                                     <TextField label="Return Date" name="returnDate" type="date" value={searchForm.returnDate} onChange={handleSearchChange} fullWidth InputLabelProps={{ shrink: true }} />
                                 </Grid>
-                                <Grid item>
+                                <Grid item xs={6} sm={3}>
                                     <FormControl fullWidth>
                                         <InputLabel>Passengers</InputLabel>
                                         <Select name="passengers" value={searchForm.passengers} onChange={handleSearchChange} label="Passengers">
@@ -162,7 +163,7 @@ const Dashboard = () => {
                                         </Select>
                                     </FormControl>
                                 </Grid>
-                                <Grid item>
+                                <Grid item xs={6} sm={3}>
                                     <FormControl fullWidth>
                                         <InputLabel>Class</InputLabel>
                                         <Select name="class" value={searchForm.class} onChange={handleSearchChange} label="Class">
@@ -172,7 +173,7 @@ const Dashboard = () => {
                                         </Select>
                                     </FormControl>
                                 </Grid>
-                                <Grid item style={{ gridColumn: 'span 3' }}>
+                                <Grid item xs={12}>
                                     <Button type="submit" variant="contained" startIcon={<SearchIcon />} fullWidth>Search Flights</Button>
                                 </Grid>
                             </Grid>
