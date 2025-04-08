@@ -29,6 +29,7 @@ import {
     Search as SearchIcon,
 } from '@mui/icons-material';
 import './Dashboard.css';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -46,7 +47,6 @@ const Dashboard = () => {
         class: 'economy',
     });
 
-    // ✅ Get user from localStorage
     const user = JSON.parse(localStorage.getItem('user'));
 
     const handleDrawerToggle = () => {
@@ -61,11 +61,44 @@ const Dashboard = () => {
         }));
     };
 
-    const handleSearchSubmit = (e) => {
-        e.preventDefault();
-        console.log('Search parameters:', searchForm);
-    };
+    const navigate = useNavigate();
 
+    const handleSearchSubmit = async (e) => {
+        e.preventDefault();
+
+        const fromCity = searchForm.fromCity.trim();
+        const toCity = searchForm.toCity.trim();
+
+        if (!fromCity || !toCity) {
+            alert('Please fill in both From and To fields');
+            return;
+        }
+
+        try {
+            const queryParams = new URLSearchParams();
+            queryParams.append('fromCity', fromCity);
+            queryParams.append('toCity', toCity);
+
+            if (searchForm.departureDate) queryParams.append('departureDate', searchForm.departureDate);
+            if (searchForm.passengers) queryParams.append('passengers', searchForm.passengers);
+            if (searchForm.class) queryParams.append('class', searchForm.class);
+
+            const res = await fetch(`http://localhost:5000/flights?${queryParams.toString()}`);
+            const data = await res.json();
+
+            if (data.flights?.length > 0) {
+                // Redirect to results page and pass data via state
+                navigate('/results', { state: { flights: data.flights } });
+            } else {
+                alert('No flights found matching your criteria.');
+            }
+        } catch (err) {
+            console.error('Error fetching flights:', err);
+            alert('Error occurred while searching for flights.');
+        }
+    };
+ 
+    
     const drawer = (
         <div>
             <Box className="user-profile">
@@ -150,7 +183,7 @@ const Dashboard = () => {
                                     <TextField label="Departure Date" name="departureDate" type="date" value={searchForm.departureDate} onChange={handleSearchChange} fullWidth InputLabelProps={{ shrink: true }} />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <TextField label="Return Date" name="returnDate" type="date" value={searchForm.returnDate} onChange={handleSearchChange} fullWidth InputLabelProps={{ shrink: true }} />
+                                    <TextField label="Start Time" name="starttime" value={searchForm.starttime} onChange={handleSearchChange} fullWidth InputLabelProps={{ shrink: true }} />
                                 </Grid>
                                 <Grid item xs={6} sm={3}>
                                     <FormControl fullWidth>
