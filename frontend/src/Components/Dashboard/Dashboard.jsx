@@ -80,6 +80,8 @@ const Dashboard = () => {
             queryParams.append('toCity', toCity);
 
             if (searchForm.departureDate) queryParams.append('departureDate', searchForm.departureDate);
+            if (searchForm.starttime) queryParams.append('starttime', searchForm.starttime);
+            
             if (searchForm.passengers) queryParams.append('passengers', searchForm.passengers);
             if (searchForm.class) queryParams.append('class', searchForm.class);
 
@@ -183,7 +185,7 @@ const Dashboard = () => {
                                     <TextField label="Departure Date" name="departureDate" type="date" value={searchForm.departureDate} onChange={handleSearchChange} fullWidth InputLabelProps={{ shrink: true }} />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <TextField label="Start Time" name="starttime" value={searchForm.starttime} onChange={handleSearchChange} fullWidth InputLabelProps={{ shrink: true }} />
+                                    <TextField label="Start Time" name="starttime" type="time" value={searchForm.starttime} onChange={handleSearchChange} fullWidth InputLabelProps={{ shrink: true }} />
                                 </Grid>
                                 <Grid item xs={6} sm={3}>
                                     <FormControl fullWidth>
@@ -200,7 +202,7 @@ const Dashboard = () => {
                                     <FormControl fullWidth>
                                         <InputLabel>Class</InputLabel>
                                         <Select name="class" value={searchForm.class} onChange={handleSearchChange} label="Class">
-                                            <MenuItem value="economy">Economy</MenuItem>
+                                        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                   <MenuItem value="economy">Economy</MenuItem>
                                             <MenuItem value="business">Business</MenuItem>
                                             <MenuItem value="first">First Class</MenuItem>
                                         </Select>

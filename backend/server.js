@@ -75,7 +75,7 @@ app.get('/flights', async (req, res) => {
   };
 
   if (departureDate) query.date = departureDate;
-  if (starttime) query.start_time = { $gte: starttime }; // filter start_time >= starttime
+  if (starttime) query.start_time = { $gte: starttime };
   if (passengers) query.remaining_seats = { $gte: parseInt(passengers) };
 
   try {
