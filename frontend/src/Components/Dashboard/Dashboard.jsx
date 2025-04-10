@@ -185,7 +185,7 @@ const Dashboard = () => {
                                     <TextField label="Departure Date" name="departureDate" type="date" value={searchForm.departureDate} onChange={handleSearchChange} fullWidth InputLabelProps={{ shrink: true }} />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
-                                    <TextField label="Start Time" name="starttime" type="time" value={searchForm.starttime} onChange={handleSearchChange} fullWidth InputLabelProps={{ shrink: true }} />
+                                    <TextField label="Start Time" name="starttime" type="time" value={searchForm.starttime} onChange={handleSearchChange} fullWidth InputLabelProps={{ shrink: true }} inputProps={{ step: 60, pattern: "[0-9]{2}:[0-9]{2}", }} />
                                 </Grid>
                                 <Grid item xs={6} sm={3}>
                                     <FormControl fullWidth>
