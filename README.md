@@ -30,9 +30,9 @@ SkyLink is a comprehensive full-stack airline management system that simplifies 
 
 ### Installation
 
-1. Clone the repository:
+1. Clone the repository
    
-2. Set Up the Server:
+2. Set up the server:
    ```bash
    cd backend
    npm install
@@ -46,11 +46,3 @@ SkyLink is a comprehensive full-stack airline management system that simplifies 
    cd frontend
    npm install
    npm start
-   
-
-   
-
-
-
-
-   
